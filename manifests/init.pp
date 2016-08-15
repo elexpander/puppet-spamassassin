@@ -71,6 +71,10 @@
 # Assign scores (the number of points for a hit) to a given test.
 # Scores can be positive or negative real numbers or integers.
 #
+# [*dns_query_restrictions*]
+# Deny or allow queries to listed domains.
+# Domains must be preceded by literal 'allow' or 'deny'.
+#
 # [*whitelist_from*]
 # Used to whitelist sender addresses which send mail that is often
 # tagged (incorrectly) as spam. This would be written to the global
@@ -385,6 +389,7 @@ class spamassassin(
   # Scoring options
   $required_score                     = 5,
   $score_tests                        = {},
+  $dns_query_restrictions             = []
   $configdir                          = $::spamassassin::params::configdir,
   $spamd_options_file                 = $::spamassassin::params::spamd_options_file,
   $spamd_options_var                  = $::spamassassin::params::spamd_options_var,
@@ -503,6 +508,7 @@ class spamassassin(
 
   validate_hash($score_tests)
 
+  validate_array($dns_query_restrictions)
   validate_array($whitelist_from)
   validate_array($whitelist_to)
   validate_array($blacklist_from)

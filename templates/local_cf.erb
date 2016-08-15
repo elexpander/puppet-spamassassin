@@ -15,6 +15,9 @@ required_score      <%= @required_score %>
 <% @score_tests.each_pair do |test,score| -%>
 score <%= test %> <%= score %>
 <% end -%>
+<% @dns_query_restrictions.each do |restriction| -%>
+dns_query_restriction <%= @restriction %>
+<% end -%>
 <%if @rewrite_header_subject -%>
 rewrite_header subject <%= @rewrite_header_subject %>
 <% end -%>
